@@ -7,13 +7,13 @@ public class CapsuleMoving : MonoBehaviour
     [SerializeField] float shipSpeedPerSecond;
 
     Transform myTransform;
-    [SerializeField] ExampleScript exampleScript;
+    //[SerializeField] ExampleScript exampleScript;
 
     private void Start()
     {
         myTransform = transform;
-        exampleScript = gameObject.GetComponent<ExampleScript>();
-        exampleScript.enabled = false;
+        //exampleScript = gameObject.GetComponent<ExampleScript>();
+        //exampleScript.enabled = false;
     }
 
     private void Update()
