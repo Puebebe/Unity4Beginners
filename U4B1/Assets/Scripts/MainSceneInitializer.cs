@@ -8,19 +8,17 @@ public class MainSceneInitializer : MonoBehaviour
     [SerializeField] float shipSpeed;
     [SerializeField] float asteroidSpeed;
 
-    [SerializeField] List<MovingComponent> ships;
-    [SerializeField] List<MovingComponent> rocks;
+    [SerializeField] MovingComponent ship;
+    [FormerlySerializedAs("rocks")]
+    [SerializeField] List<MovingComponent> asteroids;
 
     private void Awake()
     {
-        for (int i = 0; i < ships.Count; i++)
-        {
-            ships[i].Initialize(shipSpeed, new InputAdapter());
-        }
+        ship.Initialize(shipSpeed, new InputAdapter());
 
-        for (int i = 0; i < rocks.Count; i++)
+        for (int i = 0; i < asteroids.Count; i++)
         {
-            rocks[i].Initialize(asteroidSpeed, new LeftInputAdapter());
+            asteroids[i].Initialize(asteroidSpeed, new LeftInputAdapter());
         }
     }
 }
