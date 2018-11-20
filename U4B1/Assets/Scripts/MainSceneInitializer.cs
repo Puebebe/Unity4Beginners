@@ -22,7 +22,5 @@ public class MainSceneInitializer : MonoBehaviour
         asteroidCreator.Intialize(asteroidSpeedMin, asteroidSpeedMax, asteroidSpawnPointX, asteroidSpawnPointY, asteroidPrefab);
 
         ship.Initialize(shipSpeed, new InputAdapter());
-
-        
     }
 }

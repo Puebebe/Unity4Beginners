@@ -20,7 +20,7 @@ public class AsteroidCreator : MonoBehaviour
         this.asteroidPrefab = asteroidPrefab;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         CreateAsteroid();
     }
