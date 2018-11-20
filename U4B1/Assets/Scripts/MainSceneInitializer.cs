@@ -7,6 +7,7 @@ public class MainSceneInitializer : MonoBehaviour
 {
     [SerializeField] float shipSpeed;
     [SerializeField] float asteroidSpeed;
+    [SerializeField] GameObject asteroidPrefab;
 
     [SerializeField] MovingComponent ship;
     [FormerlySerializedAs("rocks")]
