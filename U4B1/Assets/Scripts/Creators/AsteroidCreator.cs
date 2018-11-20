@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidCreator
+public class AsteroidCreator : MonoBehaviour
 {
     private float minSpeed;
     private float maxSpeed;
@@ -11,21 +11,26 @@ public class AsteroidCreator
     private IInput input;
     private GameObject asteroidPrefab;
 
-    public AsteroidCreator(float minSpeed, float maxSpeed, float spawnPointX, float spawnPointY, IInput input, GameObject asteroidPrefab)
+    public void Intialize(float minSpeed, float maxSpeed, float spawnPointX, float spawnPointY, GameObject asteroidPrefab)
     {
         this.minSpeed = minSpeed;
         this.maxSpeed = maxSpeed;
         this.spawnPointX = spawnPointX;
-        this.spawnPointY = spawnPointY; 
-        this.input = input;
+        this.spawnPointY = spawnPointY;
         this.asteroidPrefab = asteroidPrefab;
     }
 
-    public GameObject CreateAsteroid()
+    private void Update()
     {
-        GameObject asteroid = GameObject.Instantiate(asteroidPrefab, new Vector3(spawnPointX, RandomYPosition()), Quaternion.identity);
-        asteroid.GetComponent<MovingComponent>().StartCoroutine(WaitForDestruction(asteroid));
-        return asteroid;
+        CreateAsteroid();
+    }
+
+    public void CreateAsteroid()
+    {
+        GameObject asteroid = Instantiate(asteroidPrefab, new Vector3(spawnPointX, RandomYPosition()), Quaternion.identity, transform);
+        MovingComponent moving = asteroid.GetComponent<MovingComponent>();
+        moving.Initialize(10, new LeftInputAdapter());
+        moving.StartCoroutine(WaitForDestruction(asteroid));
     }
 
     private float RandomYPosition()

@@ -12,17 +12,14 @@ public class MainSceneInitializer : MonoBehaviour
     [SerializeField] float asteroidSpawnPointX;
     [SerializeField] float asteroidSpawnPointY;
     [SerializeField] GameObject asteroidPrefab;
+    [SerializeField] AsteroidCreator asteroidCreator;
 
     [Header("Scene References")]
     [SerializeField] MovingComponent ship;
-    [FormerlySerializedAs("rocks")]
-    [SerializeField] List<MovingComponent> asteroids;
-
-    private AsteroidCreator asteroidCreator;
 
     private void Awake()
     {
-        asteroidCreator = new AsteroidCreator(asteroidSpeedMin, asteroidSpeedMax, asteroidSpawnPointX, asteroidSpawnPointY, new LeftInputAdapter(), asteroidPrefab);
+        asteroidCreator.Intialize(asteroidSpeedMin, asteroidSpeedMax, asteroidSpawnPointX, asteroidSpawnPointY, asteroidPrefab);
 
         ship.Initialize(shipSpeed, new InputAdapter());
 
