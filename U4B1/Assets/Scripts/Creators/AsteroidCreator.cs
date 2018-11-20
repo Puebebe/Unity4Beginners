@@ -27,10 +27,15 @@ public class AsteroidCreator : MonoBehaviour
 
     public void CreateAsteroid()
     {
-        GameObject asteroid = Instantiate(asteroidPrefab, new Vector3(spawnPointX, RandomYPosition()), Quaternion.identity, transform);
+        GameObject asteroid = Instantiate(asteroidPrefab, new Vector3(spawnPointX, RandomYPosition()), asteroidPrefab.transform.rotation, transform);
         MovingComponent moving = asteroid.GetComponent<MovingComponent>();
-        moving.Initialize(10, new LeftInputAdapter());
+        moving.Initialize(RandomSpeed(), new LeftInputAdapter());
         moving.StartCoroutine(WaitForDestruction(asteroid));
+    }
+
+    private float RandomSpeed()
+    {
+        return Random.Range(minSpeed, maxSpeed);
     }
 
     private float RandomYPosition()
