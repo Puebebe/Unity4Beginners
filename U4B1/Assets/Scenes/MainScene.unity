@@ -266,7 +266,7 @@ MonoBehaviour:
   asteroidSpeedMax: 15
   asteroidSpawnPointX: 20
   asteroidSpawnPointY: 10
-  asteroidPrefab: {fileID: 1031231908422784, guid: 0f2269927c1d4d64996d0154c153359b,
+  asteroidPrefab: {fileID: 1268903735355234, guid: fa6f55ad3e5dd994a8672e0fdc84b8c5,
     type: 2}
   asteroidCreator: {fileID: 829819353}
   ship: {fileID: 1828331154}
