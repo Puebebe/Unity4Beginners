@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AsteroidCreator : MonoBehaviour
 {
+    private float delay = 2;
+    private float timer = 2;
     private float minSpeed;
     private float maxSpeed;
     private float spawnPointX;
@@ -20,9 +22,15 @@ public class AsteroidCreator : MonoBehaviour
         this.asteroidPrefab = asteroidPrefab;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        CreateAsteroid();
+        if (timer > 0)
+            timer -= Time.deltaTime;
+        else
+        {
+            CreateAsteroid();
+            timer = delay;
+        }
     }
 
     public void CreateAsteroid()
