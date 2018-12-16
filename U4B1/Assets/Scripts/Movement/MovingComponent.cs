@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingComponent : MonoBehaviour
 {
@@ -33,7 +30,6 @@ public class MovingComponent : MonoBehaviour
 
         if (input.GetKey("d"))
             UpdatePosition(Vector3.right);
-
     }
 
     private void UpdatePosition(Vector3 moveVector)
