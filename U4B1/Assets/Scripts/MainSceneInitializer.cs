@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class MainSceneInitializer : MonoBehaviour
 {
+    [Header("Ship variables")]
+    [SerializeField] int shipMaxLife;
     [SerializeField] float shipSpeed;
 
     [Header("Asteroid Variables")]
@@ -18,12 +21,23 @@ public class MainSceneInitializer : MonoBehaviour
     [SerializeField] int asteroidPoolSize;
 
     [Header("Scene References")]
-    [SerializeField] MovingComponent ship;
+    [SerializeField] List<GameObject> ship;
 
-    private void Awake()
+    [Header("UI")]
+    [SerializeField] Image lifeBar;
+
+    void Awake()
     {
         IPrefabPool asteroidPool = new PrefabPool(asteroidPoolSize, asteroidPrefab);
         asteroidCreator.Intialize(asteroidSpeedMin, asteroidSpeedMax, asteroidSpawnPointX, asteroidSpawnPointY, asteroidSpawnDelay, asteroidPool);
-        ship.Initialize(shipSpeed, new InputAdapter());
+
+        for (int i = 0; i < ship.Count; i++)
+        {
+            LifeManager lifeManager = gameObject.AddComponent<LifeManager>();
+            lifeManager.Initialize(lifeBar, shipMaxLife, ship[i]);
+            ship[i].GetComponent<ShipCollisionDetector>().Initialize(lifeManager.DealDamage);
+
+            ship[i].GetComponent<MovingComponent>().Initialize(shipSpeed, new InputAdapter());
+        }
     }
 }
