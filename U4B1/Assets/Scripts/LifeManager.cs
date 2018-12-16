@@ -11,15 +11,16 @@ public class LifeManager : MonoBehaviour, ILifeManager
     private Image lifeBar;
     private float maxLife;
     private float spriteWidth;
-    private GameObject ship;
 
-    public void Initialize(Image lifeBar, int currentLife, GameObject ship)
+    private IGameEnding gameEnding;
+
+    public void Initialize(Image lifeBar, int currentLife, GameObject ship, IGameEnding gameEnding)
     {
         this.lifeBar = lifeBar;
         CurrentLife = currentLife;
         maxLife = currentLife;
         spriteWidth = lifeBar.rectTransform.sizeDelta.x;
-        this.ship = ship;
+        this.gameEnding = gameEnding;
     }
 
     public void DealDamage(int damage)
@@ -27,7 +28,7 @@ public class LifeManager : MonoBehaviour, ILifeManager
         CurrentLife -= damage;
 
         if (CurrentLife <= 0)
-            Destroy(ship);
+            gameEnding.EndGame();
 
         lifeBar.rectTransform.sizeDelta = new Vector2(CurrentLife / maxLife * spriteWidth, lifeBar.rectTransform.sizeDelta.y);
     }

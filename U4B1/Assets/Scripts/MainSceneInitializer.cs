@@ -25,6 +25,8 @@ public class MainSceneInitializer : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] Image lifeBar;
+    [SerializeField] GameObject gameEndingObject;
+    [SerializeField] float gameEndingDelay;
 
     void Awake()
     {
@@ -33,8 +35,10 @@ public class MainSceneInitializer : MonoBehaviour
 
         for (int i = 0; i < ship.Count; i++)
         {
+            IGameEnding gameEnding = new GameEnding(ship[i], this, gameEndingObject, gameEndingDelay);
+
             LifeManager lifeManager = gameObject.AddComponent<LifeManager>();
-            lifeManager.Initialize(lifeBar, shipMaxLife, ship[i]);
+            lifeManager.Initialize(lifeBar, shipMaxLife, ship[i], gameEnding);
             ship[i].GetComponent<ShipCollisionDetector>().Initialize(lifeManager.DealDamage);
 
             ship[i].GetComponent<MovingComponent>().Initialize(shipSpeed, new InputAdapter());
