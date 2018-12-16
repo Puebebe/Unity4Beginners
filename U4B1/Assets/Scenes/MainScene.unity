@@ -266,9 +266,11 @@ MonoBehaviour:
   asteroidSpeedMax: 15
   asteroidSpawnPointX: 20
   asteroidSpawnPointY: 10
+  asteroidSpawnDelay: 1
   asteroidPrefab: {fileID: 1268903735355234, guid: fa6f55ad3e5dd994a8672e0fdc84b8c5,
     type: 2}
   asteroidCreator: {fileID: 829819353}
+  asteroidPoolSize: 10
   ship: {fileID: 1828331154}
 --- !u!4 &1367150340
 Transform:

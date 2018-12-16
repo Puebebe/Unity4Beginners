@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class AsteroidCreator : MonoBehaviour
 {
-    private float delay = 2;
-    private float timer = 2;
+    private float spawnDelay;
+    private float timer = 0;
     private float minSpeed;
     private float maxSpeed;
     private float spawnPointX;
     private float spawnPointY;
     private IInput input;
-    private GameObject asteroidPrefab;
+    private PrefabPool pool;
 
-    public void Intialize(float minSpeed, float maxSpeed, float spawnPointX, float spawnPointY, GameObject asteroidPrefab)
+    public void Intialize(float minSpeed, float maxSpeed, float spawnPointX, float spawnPointY, float spawnDelay, PrefabPool pool)
     {
         this.minSpeed = minSpeed;
         this.maxSpeed = maxSpeed;
         this.spawnPointX = spawnPointX;
         this.spawnPointY = spawnPointY;
-        this.asteroidPrefab = asteroidPrefab;
+        this.spawnDelay = spawnDelay;
+        this.pool = pool;
     }
 
     private void Update()
@@ -28,14 +29,17 @@ public class AsteroidCreator : MonoBehaviour
             timer -= Time.deltaTime;
         else
         {
-            CreateAsteroid();
-            timer = delay;
+            InitializeAsteroid();
+            timer = spawnDelay;
         }
     }
 
-    public void CreateAsteroid()
+    public void InitializeAsteroid()
     {
-        GameObject asteroid = Instantiate(asteroidPrefab, new Vector3(spawnPointX, RandomYPosition()), asteroidPrefab.transform.rotation, transform);
+        GameObject asteroid = pool.Get();
+        asteroid.transform.position = new Vector3(spawnPointX, RandomYPosition());
+        asteroid.transform.parent = transform;
+
         MovingComponent moving = asteroid.GetComponent<MovingComponent>();
         moving.Initialize(RandomSpeed(), new LeftInputAdapter());
         moving.StartCoroutine(WaitForDestruction(asteroid));
@@ -57,6 +61,7 @@ public class AsteroidCreator : MonoBehaviour
         {
             yield return null;
         }
-        GameObject.Destroy(asteroid);
+
+        pool.Return(asteroid);
     }
 }
