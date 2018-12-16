@@ -10,7 +10,7 @@ public class ShipCollisionDetector : MonoBehaviour
         if (collider != null)
         {
             collider.Damage();
-            Destroy(other.gameObject);
+            collider.OnCollision();
         }
     }
 }

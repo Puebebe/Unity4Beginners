@@ -43,6 +43,9 @@ public class AsteroidCreator : MonoBehaviour
         MovingComponent moving = asteroid.GetComponent<MovingComponent>();
         moving.Initialize(RandomSpeed(), new LeftInputAdapter());
         moving.StartCoroutine(WaitForDestruction(asteroid));
+
+        IAsteroidCollider asteroidCollider = asteroid.GetComponent<IAsteroidCollider>();
+        asteroidCollider.SetCollisionCallBack(ReturnToPool);
     }
 
     private float RandomSpeed()
@@ -62,6 +65,11 @@ public class AsteroidCreator : MonoBehaviour
             yield return null;
         }
 
+        ReturnToPool(asteroid);
+    }
+
+    private void ReturnToPool(GameObject asteroid)
+    {
         pool.Return(asteroid);
     }
 }
