@@ -22,7 +22,7 @@ public class MainSceneInitializer : MonoBehaviour
 
     private void Awake()
     {
-        PrefabPool asteroidPool = new PrefabPool(asteroidPoolSize, asteroidPrefab);
+        IPrefabPool asteroidPool = new PrefabPool(asteroidPoolSize, asteroidPrefab);
         asteroidCreator.Intialize(asteroidSpeedMin, asteroidSpeedMax, asteroidSpawnPointX, asteroidSpawnPointY, asteroidSpawnDelay, asteroidPool);
         ship.Initialize(shipSpeed, new InputAdapter());
     }

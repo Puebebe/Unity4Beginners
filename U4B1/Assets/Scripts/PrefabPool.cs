@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrefabPool
+public class PrefabPool : IPrefabPool
 {
     private Stack<GameObject> pool;
     private GameObject prefab;
@@ -43,7 +43,7 @@ public class PrefabPool
         return pool.Count == 0;
     }
 
-    public GameObject Instantiate()
+    private GameObject Instantiate()
     {
         GameObject created = GameObject.Instantiate(prefab, Vector3.zero, prefab.transform.rotation);
         created.SetActive(false);

@@ -11,9 +11,9 @@ public class AsteroidCreator : MonoBehaviour
     private float spawnPointX;
     private float spawnPointY;
     private IInput input;
-    private PrefabPool pool;
+    private IPrefabPool pool;
 
-    public void Intialize(float minSpeed, float maxSpeed, float spawnPointX, float spawnPointY, float spawnDelay, PrefabPool pool)
+    public void Intialize(float minSpeed, float maxSpeed, float spawnPointX, float spawnPointY, float spawnDelay, IPrefabPool pool)
     {
         this.minSpeed = minSpeed;
         this.maxSpeed = maxSpeed;
